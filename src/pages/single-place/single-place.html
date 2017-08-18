@@ -1,0 +1,55 @@
+<!--
+  Generated template for the SinglePlacePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+	<ion-navbar color="dark" >
+		<ion-title class="text-capitalize">{{place.name}}</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<ion-card>
+		<img src="{{getPhoto(place)}}" width="300" style="height: auto; max-height: 300px; min-height: 100px; background-color:LightGrey" />
+		<ion-card-content>
+			<ion-card-title color="dark" class="text-center" style="font-family: Times !important;">
+				{{place.name}}
+				<hr>
+			</ion-card-title>
+				<span class="font-14"></span>  {{place.formatted_address}}
+		</ion-card-content>
+	</ion-card>
+	<ion-card>
+		<ion-card-content >
+
+			<span  class="font-14">{{getRating(place)}}</span>
+			<span *ngIf="place.rating == undefined">Rating Unavailable</span>
+
+			<ion-range *ngIf="place.rating != undefined" min=0 max=5 [(ngModel)]="place.rating" color="gold" disabled>
+				<ion-icon small range-left name="ios-star" color="gold"></ion-icon>
+				<ion-icon range-right name="ios-star" color="gold"></ion-icon>
+ 			</ion-range>
+ 			<hr />
+		 	<div class="font-16 text-center"> <ion-icon name="ios-car" ></ion-icon> {{place.distance}}km</div>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-content>
+			
+			<p [innerHTML]="getOpeningHours(place) | safe: 'html'" padding>
+			</p>
+		</ion-card-content>
+	</ion-card>
+		<button ion-button full (click)="doDrive(place)">
+			<ion-icon name='car'></ion-icon>&nbsp;&nbsp;&nbsp; Drive Here
+		</button>
+
+
+</ion-content>

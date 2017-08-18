@@ -1,0 +1,63 @@
+<!--
+  Generated template for the ListPlacesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>Pan Shops <ion-icon name="ios-leaf" color="green"></ion-icon></ion-title>
+      <ion-buttons end>
+      <button ion-button icon-only (click)="doRefresh()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  <div padding style="color:Green; " class="text-center">
+    The following is the 
+    list of Pan Shops 
+    around you.
+  </div>
+
+  <div *ngIf="places">
+    <ion-list *ngIf="distanceLoaded">
+      <ion-item text-wrap *ngFor="let place of places | orderBy: 'distance'" class="text-capitalize button-primary do-border-card"  (click)="placeClicked($event,place)">
+      <div class="bg-light">
+          <div class="font-14 text-center text-bold text-white" style="background-color:Indigo" padding>
+            {{place.name}} 
+          </div>
+          <!-- -->
+          <div padding class="" style="background-color: #eee">
+           <div class="row">
+           <div class="col" style="font-family: 'Tahoma'">
+              {{place.formatted_address}}
+            </div>
+           </div>
+           <div class="row">
+            <div class="col text-left">
+              <p style="font-size: 18px !important; display: block;" *ngIf="place.rating == undefined" class="">
+                Rating Unavailable            
+              </p>
+              <p style="font-size: 26px !important; display: block;" *ngIf="place.rating != undefined" class="">
+                <ion-icon name="star" color="gold"></ion-icon> {{place.rating}} / 5
+
+              </p>
+
+            </div>
+            <div class="col text-right" style="font-size: 26px;">
+             <ion-icon name="ios-car" color="primary"></ion-icon> {{place.distance}} 
+           </div>
+           </div>
+         </div>
+       </div>
+     </ion-item>
+   </ion-list>
+ </div>
+</ion-content>
